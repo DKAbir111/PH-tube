@@ -41,31 +41,70 @@ const fetchCategoriesvideos = async (id) => {
     }
 }
 
+// Fetching videos details
+const fetchVideosDetails = async (videoId) => {
+    try {
+        const fetching = await fetch(`https://openapi.programming-hero.com/api/phero-tube/video/${videoId}`);
+        const data = await fetching.json();
+        displayDetails(data.video);
 
-// Display categories Button
-const displayCategories = (data) => {
-    const displayItems = document.getElementById('display-catergories');
-    data.forEach((item) => {
-        const button = document.createElement('button');
-        button.classList = "btn";
-        button.innerText = item.category;
-        displayItems.appendChild(button);
-        button.addEventListener('click', async () => {
-            button.disabled = true;
-            await fetchCategoriesvideos(item.category_id);
-            button.disabled = false;
-        });
+    }
+    catch (err) {
+        console.error("Error fetching videos categories:", err);
 
-
-    })
-
+    }
 }
 
 
+const displayDetails = (video) => {
+    const modalContainer = document.getElementById('modal-content');
+    modalContainer.innerHTML = `
+    <img src=${video.thumbnail} />
+    <p>${video.description}</p>
+    `; // Clear the previous content
+    document.getElementById("customModal").showModal()
+}
+
+
+const displayCategories = (data) => {
+    const displayItems = document.getElementById('display-catergories');
+    let activeButton = null; // Keep track of the active button
+
+    data.forEach((item) => {
+        const button = document.createElement('button');
+        button.classList = "btn"; // Default class for buttons
+        button.innerText = item.category;
+        displayItems.appendChild(button);
+
+        button.addEventListener('click', async () => {
+            // Disable the button during fetch
+            button.disabled = true;
+
+            // If there is an active button, remove the active class
+            if (activeButton && activeButton !== button) {
+                activeButton.classList = "btn"; // Reset the previous active button to its default class
+            }
+
+            // Set the clicked button as active and add the error styling
+            button.classList = "btn btn-error text-white";
+            activeButton = button; // Update the active button reference
+
+            // Fetch category videos
+            await fetchCategoriesvideos(item.category_id);
+
+            // Re-enable the button after fetching
+            button.disabled = false;
+        });
+    });
+};
+
+
+
+
 // Fetching videos
-const fetchVideos = async () => {
+const fetchVideos = async (search_text = "") => {
     try {
-        const fetching = await fetch(urlVideos);
+        const fetching = await fetch(`https://openapi.programming-hero.com/api/phero-tube/videos?title=${search_text}`);
         const data = await fetching.json();
         displayVideos(data.videos);
     }
@@ -78,13 +117,13 @@ const fetchVideos = async () => {
 
 //Display videos
 const displayVideos = (data) => {
-    console.log(data);
     displayItems = document.getElementById('display-videos');
     displayItems.innerHTML = "";
-    data.forEach((item) => {
-        const div = document.createElement('div');
-        div.classList = "card card-compact";
-        div.innerHTML = `
+    if (data.length > 0) {
+        data.forEach((item) => {
+            const div = document.createElement('div');
+            div.classList = "card card-compact";
+            div.innerHTML = `
  <figure class="relative">
     <img src="${item.thumbnail}" alt="thumbnail" class="h-[200px] w-full object-cover" />
 
@@ -105,15 +144,28 @@ const displayVideos = (data) => {
             ${item.authors[0].verified ? '<img src="https://img.icons8.com/?size=100&id=SRJUuaAShjVD&format=png&color=000000" alt="verified" class="h-5 w-5" />' : null}
             
         </div>
+        <div class="flex items-center justify-between w-full">
         <p class="text-stone-400 text-sm">${item.others.views}</p>
+        <button class="bg-red-500 text-white px-2 rounded" onclick="fetchVideosDetails('${item.video_id}')">Details</button>
+           </div>
     </div>
 </div>
         `
-        displayItems.appendChild(div);
-    })
-
+            displayItems.appendChild(div);
+        })
+    }
+    else {
+        displayItems.innerHTML = `<div class="flex flex-col items-center gap-5 col-span-full mt-20"> 
+        <img src="./Resources/Icon.png"/>
+        <h2 class="text-xl font-bold text-center">No Content here in this Category</h2>
+        </div>`;
+    }
 }
 
+
+document.getElementById('search-box').addEventListener("keyup", (event) => {
+    fetchVideos(event.target.value);
+})
 // Calling function
 fetchCategories();
 fetchVideos();
