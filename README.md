@@ -42,3 +42,84 @@ To run this project locally, follow these steps:
 
    ```bash
    git clone https://github.com/yourusername/ph-tube.git
+
+# Navigate to the project directory
+cd ph-tube
+
+# Open the index.html file in your browser
+open index.html
+
+# Alternatively, you may use a local development server such as Live Server for a better development experience.
+
+#############################
+# Usage
+#############################
+
+# Browsing Categories:
+# Upon opening the site, categories are fetched dynamically from the API.
+# You can click on any category to view the videos available in that category.
+
+# Searching for Videos:
+# Use the search bar at the top to search for videos by title. The results will automatically update as you type.
+
+# Viewing Video Details:
+# Click the "Details" button on any video card to open a modal with more detailed information about the selected video.
+
+
+#############################
+# API Reference
+#############################
+
+# This project utilizes the Programming Hero API for fetching video categories and video details.
+
+# Categories Endpoint:
+# GET https://openapi.programming-hero.com/api/phero-tube/categories
+# Fetches all available video categories.
+
+# Category Videos Endpoint:
+# GET https://openapi.programming-hero.com/api/phero-tube/category/{category_id}
+# Fetches videos based on the selected category.
+
+# Video Details Endpoint:
+# GET https://openapi.programming-hero.com/api/phero-tube/video/{video_id}
+# Fetches detailed information for a specific video.
+
+
+#############################
+# Contributing
+#############################
+
+# Contributions are welcome! Please follow the steps below to contribute to this project:
+
+# 1. Fork the repository.
+# 2. Create a new branch:
+git checkout -b my-feature-branch
+
+# 3. Make your changes and commit them:
+git commit -m 'Add some feature'
+
+# 4. Push to the branch:
+git push origin my-feature-branch
+
+# 5. Submit a pull request.
+
+# Please make sure your code follows the existing coding style and passes all linting checks.
+
+
+#############################
+# License
+#############################
+
+# This project is licensed under the MIT License.
+# See the LICENSE file for details.
+
+
+#############################
+# Saving the README.md file
+#############################
+
+# Once you've pasted the content into the terminal:
+# 1. Press `CTRL + X` to exit.
+# 2. Press `Y` to confirm saving the file.
+# 3. Press `Enter` to confirm the file name as `README.md`.
+
