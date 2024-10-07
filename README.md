@@ -25,7 +25,7 @@ PH Tube is a video platform that allows users to explore videos by category, sea
 
 ## Demo
 
-You can visit the live demo of the project at: [PH Tube Live](#) (Add your live link here if available)
+You can visit the live demo of the project at: https://dkabir111.github.io/PH-tube/
 
 ## Technologies Used
 
@@ -40,16 +40,14 @@ To run this project locally, follow these steps:
 
 1. Clone the repository:
 
-   ```bash
    git clone https://github.com/yourusername/ph-tube.git
    
 2. Navigate to the project directory:
-  ```bash
+
 cd ph-tube
 3. Open the index.html file in your browser to view the application:
- ```bash
-open index.html
 
+open index.html
 
 -Alternatively, you can use a local development server such as Live Server for a better development experience.
 Usage
@@ -64,21 +62,21 @@ API Reference
 
 
 ##  Categories Endpoint:
- ```bash
-GET https://openapi.programming-hero.com/api/phero-tube/categories
+
+1. GET https://openapi.programming-hero.com/api/phero-tube/categories
 Fetches all available video categories.
 Category Videos Endpoint:
- ```bash
-GET https://openapi.programming-hero.com/api/phero-tube/category/{category_id}
+
+2. GET https://openapi.programming-hero.com/api/phero-tube/category/{category_id}
 Fetches videos based on the selected category.
 Video Details Endpoint:
- ```bash
-GET https://openapi.programming-hero.com/api/phero-tube/video/{video_id}
+
+3. GET https://openapi.programming-hero.com/api/phero-tube/video/{video_id}
 Fetches detailed information for a specific video.
 Contributing
 Contributions are welcome! Please follow the steps below to contribute to this project:
 
-Fork the repository.
+## Fork the repository.
 Create a new branch: git checkout -b my-feature-branch.
 Make your changes and commit them: git commit -m 'Add some feature'.
 Push to the branch: git push origin my-feature-branch.
@@ -86,7 +84,7 @@ Submit a pull request.
 Please make sure your code follows the existing coding style and passes all linting checks.
 
 License
- ```bash
+
 This project is licensed under the MIT License. See the LICENSE file for details.
 
 You can copy and paste this directly into your terminal when creating your `README.md` file, and it is fully supported by GitHub markdown.
